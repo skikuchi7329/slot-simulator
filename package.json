@@ -1,0 +1,8 @@
+{
+  "name": "slot-simulator",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/skikuchi7329/slot-simulator.git",
+  "author": "Shohei Kikuchi <killchance2256@gmail.com>",
+  "license": "MIT"
+}
