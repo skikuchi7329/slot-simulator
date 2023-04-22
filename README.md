@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -44,3 +45,29 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+=======
+# スロットシミュレーター
+
+### スロットの遊戯をシミュレーションし出玉の推移を見る。
+
+
+### 開発環境
+
+- 言語はReact+TypeScriptを使用。styleはstyled-componentを使用。
+
+### 要件定義
+
+- まずSアイムジャグラーのシミュレーションを作成し、順次他機種も導入する。他機種を導入した場合プルダウンメニューで変更可能にする。他機種の導入をスムーズにするための
+- 設定は変更できるようにする。（プルダウンメニュー）
+- 回転数は1000回〜10000回を1000回転区切りで設定できるようにする。
+- X軸を回転数、Y軸を回転数としたスランプグラフを表示する。
+- フラグの種類とその確率(設定6のみ)を以下に示す。
+    - ビッグボーナス(以下BB):1/255　251枚
+    - レギュラーボーナス(以下RB):1/255　95枚
+    - ブドウ確率:1/5.848 8枚
+    - チェリー:1/31.51 2枚
+    - リプレイ:1/7.298 3枚
+    - ハズレ:余事象 
+- 表に回転数、BB回数、RB回数と、BB確率、RB確率、BBとRBの合算の確率、機械割(総払い出し枚数/総投入枚数)*100)、収支(差枚数*20)を表示する。
+- 1000回まで同一の試行を繰り返し、最大収支、最低収支、最大ボーナス回数、平均収支、機械割等を出す（理想）。これは初期段階では実装しない。
+>>>>>>> bfb2bd1b886435c1e007ecf40e846cabca8f044f
