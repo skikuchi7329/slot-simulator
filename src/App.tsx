@@ -133,6 +133,11 @@ function App() {
           <td>{fraction(rbCount, totalCount)}</td>
         </tr>
         <tr>
+          <td>合算</td>
+          <td>{rbCount + bbCount}</td>
+          <td>{fraction(rbCount + bbCount, totalCount)}</td>
+        </tr>
+        <tr>
           <td>チェリー</td>
           <td>{cherryCount}</td>
           <td>{fraction(cherryCount, totalCount)}</td>
