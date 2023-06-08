@@ -109,6 +109,7 @@ function App() {
 
   return (
     <>
+      <h1>スロットシミュレーション</h1>
       <button onClick={random}>スタート</button>
       <div>{totalCoins}</div>
       <Line data={data} options={options} />
