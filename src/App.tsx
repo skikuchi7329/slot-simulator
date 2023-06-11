@@ -157,6 +157,10 @@ function App() {
           <td>{missCount}</td>
           <td>{fraction(missCount, totalCount)}</td>
         </tr>
+        <tr>
+          <td>機械割</td>
+          <td>{(((totalCoins + 8000 * 3) / (8000 * 3) * 100)).toFixed(2)}%</td>
+        </tr>
       </tbody>
     </table>
     </>
