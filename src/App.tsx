@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Line } from 'react-chartjs-2';
+import Header from './component/Header';
+import Footer from './component/Footer';
 import './App.css';
 import { Chart, LineController, LinearScale, PointElement, LineElement } from 'chart.js';
 
@@ -109,7 +111,7 @@ function App() {
 
   return (
     <>
-      <h1>スロットシミュレーション</h1>
+      <Header />
       <button onClick={random}>スタート</button>
       <div>{totalCoins}</div>
       <Line data={data} options={options} />
@@ -163,6 +165,7 @@ function App() {
         </tr>
       </tbody>
     </table>
+    <Footer />
     </>
   );
 }
