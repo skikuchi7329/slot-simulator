@@ -89,11 +89,11 @@ function Graphs() {
   const data = {
     datasets: [
       {
-        label: "Coin Trend",
+        label: "Slamp Graphs",
         data: results,
         fill: false,
-        backgroundColor: "rgb(75, 192, 192)",
-        borderColor: "rgba(75, 192, 192, 0.2)",
+        backgroundColor: "rgb(3, 22, 129)",
+        borderColor: "rgba(15, 8, 227, 0.2)",
       },
     ],
   };

@@ -37,7 +37,7 @@ function Menu () {
           <tr>
             <th>回転数</th>
             <td>
-              <input type="tel" value="999999" maxLength={7} />
+              <input type="tel" id="games" value="999999" maxLength={7} />
             </td>
           </tr>
           <tr>
