@@ -121,9 +121,8 @@ function Graphs() {
           スタート
         </button>
 
-        <div className="graph">
+        
           <Line data={data} options={options} />
-        </div>
 
         <table className="styled-table">
           <caption>結果</caption>
