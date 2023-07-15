@@ -1,8 +1,7 @@
 import React from "react";
 import StyldHeader from "./index.styled";
 
-
-function Header () {
+function Header() {
   return (
     <StyldHeader>
       <header>
@@ -25,7 +24,7 @@ function Header () {
         </div>
       </header>
     </StyldHeader>
-  )
+  );
 }
 
 export default Header;

@@ -1,8 +1,7 @@
 import React from "react";
 import StyledFooter from "./index.styled";
 
-
-function Footer () {
+function Footer() {
   return (
     <StyledFooter>
       <footer>
@@ -24,7 +23,7 @@ function Footer () {
         <p>&copy; 2023/06 Shopeco</p>
       </footer>
     </StyledFooter>
-  )
+  );
 }
 
 export default Footer;

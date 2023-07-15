@@ -49,8 +49,6 @@ const StyledGraphs = styled.div`
     text-align: left;
   }
 
-  
-
   .styled-table th {
     width: 20%; /* 幅を20%に変更 */
     background-color: #333;

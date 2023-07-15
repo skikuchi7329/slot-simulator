@@ -1,9 +1,7 @@
 import React from "react";
 import StyledMenu from "./index.styled";
 
-
-
-function Menu () {
+function Menu() {
   return (
     <StyledMenu>
       <table className="styled-table">
@@ -49,7 +47,7 @@ function Menu () {
         </tbody>
       </table>
     </StyledMenu>
-  )
+  );
 }
 
 export default Menu;

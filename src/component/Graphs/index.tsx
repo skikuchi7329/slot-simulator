@@ -121,8 +121,7 @@ function Graphs() {
           スタート
         </button>
 
-        
-          <Line data={data} options={options} />
+        <Line data={data} options={options} />
 
         <table className="styled-table">
           <caption>結果</caption>
