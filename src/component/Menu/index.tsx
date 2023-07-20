@@ -28,14 +28,14 @@ function Menu() {
                 <option value="3">3</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
-                <option value="6">6</option>
+                <option value="6" selected>6</option>
               </select>
             </td>
           </tr>
           <tr>
             <th>回転数</th>
             <td>
-              <input type="tel" id="games" value="999999" maxLength={7} />
+              <input type="tel" id="games" value="8000" maxLength={7} />
             </td>
           </tr>
           <tr>
