@@ -7,11 +7,18 @@ import {
   PointElement,
   LineElement,
 } from "chart.js";
+import Menu from "../Menu";
 import StyledGraphs from "./index.styled";
+import { NumberLiteralType } from "typescript";
 
 Chart.register(LineController, LinearScale, PointElement, LineElement);
 
-function Graphs() {
+type Props = {
+  game: number
+  trial: number
+}
+
+function Graphs({game, trial}:Props) {
   const [totalCoins, setTotalCoins] = useState(0);
   const [results, setResults] = useState<{ x: number; y: number }[]>([]);
   const [bbCount, setBBCount] = useState(0);
@@ -52,7 +59,7 @@ function Graphs() {
         miss = 0;
       let newCoins = currentCoins;
       let newResults = [];
-      for (let i = 0; i < 8000; i++) {
+      for (let i = 0; i < game; i++) {
         newCoins -= 3;
         const rondomNum = Math.floor(Math.random() * 65536 + 1);
         if (1 <= rondomNum && 255 >= rondomNum) {
@@ -137,7 +144,7 @@ function Graphs() {
             <tr>
               <th>機械割</th>
               <td>
-                {(((totalCoins + 8000 * 3) / (8000 * 3)) * 100).toFixed(2)}%
+                {(((totalCoins + game * 3) / (game * 3)) * 100).toFixed(2)}%
               </td>
             </tr>
           </tbody>
