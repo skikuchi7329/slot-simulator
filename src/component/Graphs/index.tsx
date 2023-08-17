@@ -135,7 +135,7 @@ function Graphs({game, trial}:Props) {
           <tbody>
             <tr>
               <th>差枚数</th>
-              <td>{totalCoins}</td>
+              <td>{totalCoins}枚</td>
             </tr>
             <tr>
               <th>収支</th>
