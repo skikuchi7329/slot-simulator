@@ -53,12 +53,12 @@ function Menu({game, setGame, trial, setTrial}: Props) {
               <input type="tel" id="game" value={game} onChange={handleGameChange} maxLength={7} />
             </td>
           </tr>
-          <tr>
+          {/* <tr>
             <th>試行回数</th>
             <td>
               <input type="number" id="trial" value={trial} onChange={handleTrialChange} maxLength={4} />
             </td>
-          </tr>
+          </tr> */}
         </tbody>
       </table>
     </StyledMenu>
