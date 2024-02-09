@@ -1,22 +1,23 @@
-import React, { useState } from "react";
-import Header from "./component/Header";
-import Footer from "./component/Footer";
-import Graphs from "./component/Graphs";
-import Menu from "./component/Menu";
-import "./App.css";
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
+import Home from './pages/Home';
+import About from './pages/About';
+import Contact from './pages/contact';
+import Detail from './pages/detail';
+import NotFound from './pages/NotFound';
 
 function App() {
-  const [game, setGame] = useState<number>(8000); 
-
-  const [trial, setTrial] = useState<number>(1000);
-
   return (
-    <>
-      <Header />
-      <Menu game={game} setGame={setGame} trial={trial} setTrial={setTrial} />
-      <Graphs game={game} trial={trial}/>
-      <Footer />
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/detail" element={<Detail />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Router>
   );
 }
 
