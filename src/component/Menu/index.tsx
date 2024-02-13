@@ -27,10 +27,10 @@ function Menu({game, setGame, trial, setTrial}: Props) {
             <td>
               <select name="" id="">
                 <option value="s-Im">Sアイムジャグラー</option>
-                <option value="my5">マイジャグラーV</option>
-                <option value="happy">ハッピージャグラー2</option>
-                <option value="funky">ファンキージャグラー2</option>
-                <option value="gogo">ゴーゴージャグラー3</option>
+                <option  disabled value="my5">マイジャグラーV</option>
+                <option  disabled value="happy">ハッピージャグラー2</option>
+                <option  disabled value="funky">ファンキージャグラー2</option>
+                <option  disabled value="gogo">ゴーゴージャグラー3</option>
               </select>
             </td>
           </tr>
@@ -38,11 +38,11 @@ function Menu({game, setGame, trial, setTrial}: Props) {
             <th>設定</th>
             <td>
               <select name="" id="">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
+                <option  disabled value="1">1</option>
+                <option  disabled value="2">2</option>
+                <option  disabled value="3">3</option>
+                <option  disabled value="4">4</option>
+                <option  disabled value="5">5</option>
                 <option value="6" selected>6</option>
               </select>
             </td>
