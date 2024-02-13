@@ -34,6 +34,10 @@ const StyledGraphs = styled.div`
     transform: translateY(4px);
   }
 
+  .graph {
+    width: 80%;
+  }
+
   .styled-table {
     font-family: Arial, sans-serif;
     border-collapse: collapse;
@@ -50,7 +54,7 @@ const StyledGraphs = styled.div`
   }
 
   .styled-table th {
-    width: 20%; /* 幅を20%に変更 */
+    width: 20%; 
     background-color: #333;
     color: white;
     padding: 10px;

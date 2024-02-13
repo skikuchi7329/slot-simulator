@@ -127,8 +127,9 @@ function Graphs({game, trial}:Props) {
         <button className="styled-button" onClick={random}>
           スタート
         </button>
-
-        <Line data={data} options={options} />
+        <div className="graph">
+          <Line data={data} options={options} />
+        </div>
 
         <table className="styled-table">
           <caption>結果</caption>
