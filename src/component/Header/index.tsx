@@ -1,5 +1,7 @@
 import React from "react";
 import StyldHeader from "./index.styled";
+import { Routes, Route, Link } from 'react-router-dom';
+
 
 function Header() {
   return (
@@ -12,13 +14,16 @@ function Header() {
         <div className="menu">
           <ul>
             <li>
-              <a href="">開発者について</a>
+              <Link to="/">HOME</Link>
             </li>
             <li>
-              <a href="">詳細</a>
+              <Link to="/about">開発者について</Link>
             </li>
             <li>
-              <a href="">お問合せ</a>
+              <Link to="/detail">詳細</Link>
+            </li>
+            <li>
+              <Link to="/contact">お問合せ</Link>
             </li>
           </ul>
         </div>
