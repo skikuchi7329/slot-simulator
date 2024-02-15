@@ -28,7 +28,7 @@ function About() {
               </tr>
               <tr>
                 <th>好きな機種</th>
-                <td>沖ドキ、北斗、ラブ嬢</td>
+                <td>バジ絆、ギアスR2、サラ番、沖ドキ、北斗etc</td>
               </tr>
               <tr>
                 <th>趣味</th>
