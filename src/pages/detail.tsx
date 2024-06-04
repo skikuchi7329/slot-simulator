@@ -1,16 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import Header from "../component/Header/index"
+import Header from "../component/Header/index";
+import Footer from "../component/Footer/index";
 
 function Detail() {
   return (
     <StyledDetail>
-        {/* <Header /> */}
-      {/* <div className="wrapper">
-        <div className="header">
-          <h2>条件</h2>
-        </div>
-      </div> */}
+      <Header />
+      {/* <Footer /> */}
     </StyledDetail>
   );
 }
@@ -29,6 +26,6 @@ const StyledDetail = styled.div`
       text-align: center;
     }
   } */
-`
+`;
 
 export default Detail;

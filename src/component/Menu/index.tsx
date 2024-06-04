@@ -6,16 +6,15 @@ type Props = {
   setGame: React.Dispatch<React.SetStateAction<number>>;
   trial: number;
   setTrial: React.Dispatch<React.SetStateAction<number>>;
-}
+};
 
-function Menu({game, setGame, trial, setTrial}: Props) {
-
-  const handleGameChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+function Menu({ game, setGame, trial, setTrial }: Props) {
+  const handleGameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setGame(Number(e.target.value));
-  }
-  const handleTrialChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+  };
+  const handleTrialChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTrial(Number(e.target.value));
-  }
+  };
 
   return (
     <StyledMenu>
@@ -27,10 +26,18 @@ function Menu({game, setGame, trial, setTrial}: Props) {
             <td>
               <select name="" id="">
                 <option value="s-Im">Sアイムジャグラー</option>
-                <option  disabled value="my5">マイジャグラーV</option>
-                <option  disabled value="happy">ハッピージャグラー2</option>
-                <option  disabled value="funky">ファンキージャグラー2</option>
-                <option  disabled value="gogo">ゴーゴージャグラー3</option>
+                <option disabled value="my5">
+                  マイジャグラーV
+                </option>
+                <option disabled value="happy">
+                  ハッピージャグラー2
+                </option>
+                <option disabled value="funky">
+                  ファンキージャグラー2
+                </option>
+                <option disabled value="gogo">
+                  ゴーゴージャグラー3
+                </option>
               </select>
             </td>
           </tr>
@@ -38,19 +45,37 @@ function Menu({game, setGame, trial, setTrial}: Props) {
             <th>設定</th>
             <td>
               <select name="" id="">
-                <option  disabled value="1">1</option>
-                <option  disabled value="2">2</option>
-                <option  disabled value="3">3</option>
-                <option  disabled value="4">4</option>
-                <option  disabled value="5">5</option>
-                <option value="6" selected>6</option>
+                <option disabled value="1">
+                  1
+                </option>
+                <option disabled value="2">
+                  2
+                </option>
+                <option disabled value="3">
+                  3
+                </option>
+                <option disabled value="4">
+                  4
+                </option>
+                <option disabled value="5">
+                  5
+                </option>
+                <option value="6" selected>
+                  6
+                </option>
               </select>
             </td>
           </tr>
           <tr>
             <th>回転数</th>
             <td>
-              <input type="tel" id="game" value={game} onChange={handleGameChange} maxLength={7} />
+              <input
+                type="tel"
+                id="game"
+                value={game}
+                onChange={handleGameChange}
+                maxLength={7}
+              />
             </td>
           </tr>
           {/* <tr>

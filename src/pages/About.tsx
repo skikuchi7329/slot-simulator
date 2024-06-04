@@ -1,57 +1,54 @@
-import React from 'react';
-import  Header  from '../component/Header/index'
-import styled from 'styled-components';
-import data from '../../public/data.json'
-
+import React from "react";
+import Header from "../component/Header/index";
+import styled from "styled-components";
+import data from "../../public/data.json";
 
 function About() {
   return (
-  <StyledAbout>
-    <Header />
-    <div className='wrapper'>
-    <div className='profile-container'>
-        <div className='profile-title'>
-          <h3>
-            プロフィール
-          </h3>
+    <StyledAbout>
+      <Header />
+      <div className="wrapper">
+        <div className="profile-container">
+          <div className="profile-title">
+            <h3>プロフィール</h3>
+          </div>
+          <div className="profile-content">
+            <table>
+              <tbody>
+                <tr>
+                  <th>名前</th>
+                  <td>しょぺこ</td>
+                </tr>
+                <tr>
+                  <th>スロ歴</th>
+                  <td>兼業7年、専業2年</td>
+                </tr>
+                <tr>
+                  <th>好きな機種</th>
+                  <td>バジ絆、ギアスR2、サラ番、沖ドキ、北斗etc</td>
+                </tr>
+                <tr>
+                  <th>趣味</th>
+                  <td>ネトゲ、麻雀、アニメ</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div className='profile-content'>
-          <table>
-            <tbody>
-              <tr>
-                <th>名前</th>
-                <td>しょぺこ</td>
-              </tr>
-              <tr>
-                <th>スロ歴</th>
-                <td>兼業7年、専業2年</td>
-              </tr>
-              <tr>
-                <th>好きな機種</th>
-                <td>バジ絆、ギアスR2、サラ番、沖ドキ、北斗etc</td>
-              </tr>
-              <tr>
-                <th>趣味</th>
-                <td>ネトゲ、麻雀、アニメ</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
 
-      <div className='profile-container'>
-        <div className='profile-title'>
-          <h3>
-            開発者について
-          </h3>
-        </div>
-        <div className='profile-content'>
-          <p>はじめまして、しょぺこと申します。本業はエンジニアをしています（駆け出し）。大学の数学科に入るくらいには数学好きです。</p>
+        <div className="profile-container">
+          <div className="profile-title">
+            <h3>開発者について</h3>
+          </div>
+          <div className="profile-content">
+            <p>
+              はじめまして、しょぺこと申します。本業はエンジニアをしています（駆け出し）。大学の数学科に入るくらいには数学好きです。
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-  </StyledAbout>
-  )
+    </StyledAbout>
+  );
 }
 
 const StyledAbout = styled.div`

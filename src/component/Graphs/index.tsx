@@ -14,11 +14,11 @@ import { NumberLiteralType } from "typescript";
 Chart.register(LineController, LinearScale, PointElement, LineElement);
 
 type Props = {
-  game: number
-  trial: number
-}
+  game: number;
+  trial: number;
+};
 
-function Graphs({game, trial}:Props) {
+function Graphs({ game, trial }: Props) {
   const [totalCoins, setTotalCoins] = useState(0);
   const [results, setResults] = useState<{ x: number; y: number }[]>([]);
   const [bbCount, setBBCount] = useState(0);

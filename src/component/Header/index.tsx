@@ -1,7 +1,6 @@
 import React from "react";
 import StyldHeader from "./index.styled";
-import { Routes, Route, Link } from 'react-router-dom';
-
+import { Routes, Route, Link } from "react-router-dom";
 
 function Header() {
   return (

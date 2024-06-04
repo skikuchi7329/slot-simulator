@@ -54,7 +54,7 @@ const StyledGraphs = styled.div`
   }
 
   .styled-table th {
-    width: 20%; 
+    width: 20%;
     background-color: #333;
     color: white;
     padding: 10px;
