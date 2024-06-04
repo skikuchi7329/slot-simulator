@@ -1,11 +1,11 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import Home from './pages/Home';
-import About from './pages/About';
-import Contact from './pages/contact';
-import Detail from './pages/detail';
-import NotFound from './pages/NotFound';
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import Detail from "./pages/Detail";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
