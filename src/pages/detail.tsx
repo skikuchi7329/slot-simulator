@@ -5,18 +5,18 @@ import Header from "../component/Header/index"
 function Detail() {
   return (
     <StyledDetail>
-      <div className="wrapper">
-        <Header />
+        {/* <Header /> */}
+      {/* <div className="wrapper">
         <div className="header">
           <h2>条件</h2>
         </div>
-      </div>
+      </div> */}
     </StyledDetail>
   );
 }
 
 const StyledDetail = styled.div`
-  .wrapper {
+  /* .wrapper {
     margin: 0;
     width: 100%;
     height: 100%;
@@ -24,8 +24,11 @@ const StyledDetail = styled.div`
 
   .header {
     margin: 0 auto;
-    text-align: center:
-  }
+    
+    h2 {
+      text-align: center;
+    }
+  } */
 `
 
 export default Detail;

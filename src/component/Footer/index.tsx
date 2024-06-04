@@ -9,13 +9,16 @@ function Footer() {
           <nav>
             <ul>
               <li>
-                <a href="">開発者について</a>
+                <a href="/">HOME</a>
               </li>
               <li>
-                <a href="">詳細</a>
+                <a href="/about">開発者について</a>
               </li>
               <li>
-                <a href="">お知らせ</a>
+                <a href="/detail">詳細</a>
+              </li>
+              <li>
+                <a href="/contact">お問合せ</a>
               </li>
             </ul>
           </nav>
