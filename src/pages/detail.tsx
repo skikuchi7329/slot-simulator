@@ -7,7 +7,7 @@ function Detail() {
   return (
     <StyledDetail>
       <Header />
-      {/* <Footer /> */}
+      <Footer />
     </StyledDetail>
   );
 }

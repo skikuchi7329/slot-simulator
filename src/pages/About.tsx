@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "../component/Header/index";
+import Footer from "../component/Footer";
 import styled from "styled-components";
 import data from "../../public/data.json";
 
@@ -47,6 +48,7 @@ function About() {
           </div>
         </div>
       </div>
+      <Footer />
     </StyledAbout>
   );
 }
