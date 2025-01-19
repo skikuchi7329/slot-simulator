@@ -1,10 +1,10 @@
 import React from "react";
-import StyldHeader from "./index.styled";
+import StyledHeader from "./index.styled";
 import { Link } from "react-router-dom";
 
 function Header() {
   return (
-    <StyldHeader>
+    <StyledHeader>
       <header>
         <div className="title">
           <h1>スロシミュ</h1>
@@ -27,7 +27,7 @@ function Header() {
           </ul>
         </div>
       </header>
-    </StyldHeader>
+    </StyledHeader>
   );
 }
 
