@@ -1,7 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import StyledFooter from "./index.styled";
 
 function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
     <StyledFooter>
       <footer>
@@ -9,21 +12,21 @@ function Footer() {
           <nav>
             <ul>
               <li>
-                <a href="/">HOME</a>
+                <Link to="/">HOME</Link>
               </li>
               <li>
-                <a href="/about">開発者について</a>
+                <Link to="/about">開発者について</Link>
               </li>
               <li>
-                <a href="/detail">詳細</a>
+                <Link to="/detail">詳細</Link>
               </li>
               <li>
-                <a href="/contact">お問合せ</a>
+                <Link to="/contact">お問合せ</Link>
               </li>
             </ul>
           </nav>
         </div>
-        <p>&copy; 2023/06 Shopeco</p>
+        <p>&copy; {currentYear} Shopeco</p>
       </footer>
     </StyledFooter>
   );
