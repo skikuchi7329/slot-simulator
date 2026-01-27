@@ -19,7 +19,7 @@ function Menu({ game, setGame }: Props) {
           <tr>
             <th>機種</th>
             <td>
-              <select name="" id="">
+              <select id="machine-type" defaultValue="s-Im">
                 <option value="s-Im">Sアイムジャグラー</option>
                 <option disabled value="my5">
                   マイジャグラーV
@@ -39,7 +39,7 @@ function Menu({ game, setGame }: Props) {
           <tr>
             <th>設定</th>
             <td>
-              <select name="" id="">
+              <select id="setting-level" defaultValue="6">
                 <option disabled value="1">
                   1
                 </option>
@@ -55,9 +55,7 @@ function Menu({ game, setGame }: Props) {
                 <option disabled value="5">
                   5
                 </option>
-                <option value="6" selected>
-                  6
-                </option>
+                <option value="6">6</option>
               </select>
             </td>
           </tr>
@@ -65,11 +63,12 @@ function Menu({ game, setGame }: Props) {
             <th>回転数</th>
             <td>
               <input
-                type="tel"
+                type="number"
                 id="game"
                 value={game}
                 onChange={handleGameChange}
-                maxLength={7}
+                min={1}
+                max={100000}
               />
             </td>
           </tr>
