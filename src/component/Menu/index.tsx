@@ -1,19 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import StyledMenu from "./index.styled";
 
 type Props = {
   game: number;
   setGame: React.Dispatch<React.SetStateAction<number>>;
-  trial: number;
-  setTrial: React.Dispatch<React.SetStateAction<number>>;
 };
 
-function Menu({ game, setGame, trial, setTrial }: Props) {
+function Menu({ game, setGame }: Props) {
   const handleGameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setGame(Number(e.target.value));
-  };
-  const handleTrialChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTrial(Number(e.target.value));
   };
 
   return (
@@ -78,12 +73,6 @@ function Menu({ game, setGame, trial, setTrial }: Props) {
               />
             </td>
           </tr>
-          {/* <tr>
-            <th>試行回数</th>
-            <td>
-              <input type="number" id="trial" value={trial} onChange={handleTrialChange} maxLength={4} />
-            </td>
-          </tr> */}
         </tbody>
       </table>
     </StyledMenu>

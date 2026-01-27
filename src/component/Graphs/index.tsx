@@ -7,18 +7,24 @@ import {
   PointElement,
   LineElement,
 } from "chart.js";
-import Menu from "../Menu";
 import StyledGraphs from "./index.styled";
-import { NumberLiteralType } from "typescript";
+import {
+  RANDOM_MAX,
+  COINS_PER_GAME,
+  YEN_PER_COIN,
+  SYMBOL_CONFIGS,
+  getSymbolFromRandom,
+  MIN_GAME_COUNT,
+  MAX_GAME_COUNT,
+} from "../../constants/slotSettings";
 
 Chart.register(LineController, LinearScale, PointElement, LineElement);
 
 type Props = {
   game: number;
-  trial: number;
 };
 
-function Graphs({ game, trial }: Props) {
+function Graphs({ game }: Props) {
   const [totalCoins, setTotalCoins] = useState(0);
   const [results, setResults] = useState<{ x: number; y: number }[]>([]);
   const [bbCount, setBBCount] = useState(0);
@@ -27,18 +33,7 @@ function Graphs({ game, trial }: Props) {
   const [replayCount, setReplayCount] = useState(0);
   const [grapeCount, setGrapeCount] = useState(0);
   const [missCount, setMissCount] = useState(0);
-
-  function fraction(numerator: number, denominator: number) {
-    const g = gcd(numerator, denominator);
-    numerator = numerator / g;
-    denominator = denominator / g;
-
-    if (numerator === 1) {
-      return `${numerator}/${denominator.toFixed(2)}`;
-    } else {
-      return `1/${(denominator / numerator).toFixed(2)}`;
-    }
-  }
+  const [error, setError] = useState<string | null>(null);
 
   function gcd(a: number, b: number): number {
     if (!b) {
@@ -47,56 +42,108 @@ function Graphs({ game, trial }: Props) {
     return gcd(b, a % b);
   }
 
-  const random = () => {
-    setTotalCoins(0);
-    setResults([{ x: 0, y: 0 }]); //初期値をセット
-    setTotalCoins((currentCoins) => {
-      let bb = 0,
-        rb = 0,
-        cherry = 0,
-        replay = 0,
-        grape = 0,
-        miss = 0;
-      let newCoins = currentCoins;
-      let newResults = [];
-      for (let i = 0; i < game; i++) {
-        newCoins -= 3;
-        const rondomNum = Math.floor(Math.random() * 65536 + 1);
-        if (1 <= rondomNum && 255 >= rondomNum) {
-          newCoins += 252; //BB
+  function fraction(numerator: number, denominator: number): string {
+    // エラーハンドリング: 0除算の防止
+    if (denominator === 0 || numerator === 0) {
+      return "-";
+    }
+
+    // 負の値のハンドリング
+    if (numerator < 0 || denominator < 0) {
+      return "-";
+    }
+
+    const g = gcd(numerator, denominator);
+    const reducedNumerator = numerator / g;
+    const reducedDenominator = denominator / g;
+
+    if (reducedNumerator === 1) {
+      return `${reducedNumerator}/${reducedDenominator.toFixed(2)}`;
+    } else {
+      return `1/${(reducedDenominator / reducedNumerator).toFixed(2)}`;
+    }
+  }
+
+  const validateGameCount = (count: number): string | null => {
+    if (isNaN(count)) {
+      return "回転数は数値で入力してください";
+    }
+    if (count < MIN_GAME_COUNT) {
+      return `回転数は${MIN_GAME_COUNT}以上で入力してください`;
+    }
+    if (count > MAX_GAME_COUNT) {
+      return `回転数は${MAX_GAME_COUNT}以下で入力してください`;
+    }
+    return null;
+  };
+
+  const runSimulation = () => {
+    // 入力値のバリデーション
+    const validationError = validateGameCount(game);
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
+    setError(null);
+
+    let bb = 0,
+      rb = 0,
+      cherry = 0,
+      replay = 0,
+      grape = 0,
+      miss = 0;
+    let newCoins = 0;
+    const newResults: { x: number; y: number }[] = [{ x: 0, y: 0 }];
+
+    for (let i = 0; i < game; i++) {
+      newCoins -= COINS_PER_GAME;
+      const randomNum = Math.floor(Math.random() * RANDOM_MAX + 1);
+      const symbol = getSymbolFromRandom(randomNum);
+
+      switch (symbol) {
+        case "BB":
+          newCoins += SYMBOL_CONFIGS.BB.payout;
           bb++;
-        } else if (256 <= rondomNum && 511 >= rondomNum) {
-          newCoins += 96; //RB
+          break;
+        case "RB":
+          newCoins += SYMBOL_CONFIGS.RB.payout;
           rb++;
-        } else if (512 <= rondomNum && 2592 >= rondomNum) {
-          newCoins += 2; //チェリー
+          break;
+        case "CHERRY":
+          newCoins += SYMBOL_CONFIGS.CHERRY.payout;
           cherry++;
-        } else if (2593 <= rondomNum && 11571 >= rondomNum) {
-          newCoins += 3; //リプレイ
+          break;
+        case "REPLAY":
+          newCoins += SYMBOL_CONFIGS.REPLAY.payout;
           replay++;
-        } else if (11572 <= rondomNum && 22871 >= rondomNum) {
-          newCoins += 8; //ぶどう
+          break;
+        case "GRAPE":
+          newCoins += SYMBOL_CONFIGS.GRAPE.payout;
           grape++;
-        } else {
+          break;
+        case "MISS":
+        default:
           miss++;
-        }
-        newResults.push({ x: i, y: newCoins });
+          break;
       }
-      setResults(newResults);
-      setBBCount(bb);
-      setRBCount(rb);
-      setCherryCount(cherry);
-      setReplayCount(replay);
-      setGrapeCount(grape);
-      setMissCount(miss);
-      return newCoins;
-    });
+      newResults.push({ x: i + 1, y: newCoins });
+    }
+
+    setResults(newResults);
+    setBBCount(bb);
+    setRBCount(rb);
+    setCherryCount(cherry);
+    setReplayCount(replay);
+    setGrapeCount(grape);
+    setMissCount(miss);
+    setTotalCoins(newCoins);
   };
 
   const data = {
     datasets: [
       {
-        label: "Slamp Graphs",
+        label: "Slump Graph",
         data: results,
         fill: false,
         backgroundColor: "rgb(3, 22, 129)",
@@ -121,10 +168,24 @@ function Graphs({ game, trial }: Props) {
   const totalCount =
     bbCount + rbCount + cherryCount + replayCount + grapeCount + missCount;
 
+  // 機械割の計算（0除算防止）
+  const calculatePayoutRate = (): string => {
+    const totalBet = game * COINS_PER_GAME;
+    if (totalBet === 0) {
+      return "0.00";
+    }
+    return (((totalCoins + totalBet) / totalBet) * 100).toFixed(2);
+  };
+
   return (
     <StyledGraphs>
       <div className="container">
-        <button className="styled-button" onClick={random}>
+        {error && (
+          <div className="error-message" style={{ color: "red", marginBottom: "10px" }}>
+            {error}
+          </div>
+        )}
+        <button className="styled-button" onClick={runSimulation}>
           スタート
         </button>
         <div className="graph">
@@ -140,13 +201,11 @@ function Graphs({ game, trial }: Props) {
             </tr>
             <tr>
               <th>収支</th>
-              <td>{totalCoins * 20}円</td>
+              <td>{totalCoins * YEN_PER_COIN}円</td>
             </tr>
             <tr>
               <th>機械割</th>
-              <td>
-                {(((totalCoins + game * 3) / (game * 3)) * 100).toFixed(2)}%
-              </td>
+              <td>{calculatePayoutRate()}%</td>
             </tr>
           </tbody>
         </table>
@@ -162,12 +221,12 @@ function Graphs({ game, trial }: Props) {
           </thead>
           <tbody>
             <tr>
-              <th>BB</th>
+              <th>{SYMBOL_CONFIGS.BB.displayName}</th>
               <td>{bbCount}</td>
               <td>{fraction(bbCount, totalCount)}</td>
             </tr>
             <tr>
-              <th>RB</th>
+              <th>{SYMBOL_CONFIGS.RB.displayName}</th>
               <td>{rbCount}</td>
               <td>{fraction(rbCount, totalCount)}</td>
             </tr>
@@ -177,22 +236,22 @@ function Graphs({ game, trial }: Props) {
               <td>{fraction(rbCount + bbCount, totalCount)}</td>
             </tr>
             <tr>
-              <th>チェリー</th>
+              <th>{SYMBOL_CONFIGS.CHERRY.displayName}</th>
               <td>{cherryCount}</td>
               <td>{fraction(cherryCount, totalCount)}</td>
             </tr>
             <tr>
-              <th>リプレイ</th>
+              <th>{SYMBOL_CONFIGS.REPLAY.displayName}</th>
               <td>{replayCount}</td>
               <td>{fraction(replayCount, totalCount)}</td>
             </tr>
             <tr>
-              <th>ぶどう</th>
+              <th>{SYMBOL_CONFIGS.GRAPE.displayName}</th>
               <td>{grapeCount}</td>
               <td>{fraction(grapeCount, totalCount)}</td>
             </tr>
             <tr>
-              <th>ハズレ</th>
+              <th>{SYMBOL_CONFIGS.MISS.displayName}</th>
               <td>{missCount}</td>
               <td>{fraction(missCount, totalCount)}</td>
             </tr>
