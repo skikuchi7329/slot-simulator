@@ -8,6 +8,7 @@ import {
   LinearScale,
   PointElement,
   LineElement,
+  Filler,
 } from 'chart.js';
 import StyledGraphs from './styled';
 import {
@@ -23,7 +24,7 @@ import {
   getSymbolFromRandom,
 } from '@/lib/constants/slotSettings';
 
-Chart.register(LineController, LinearScale, PointElement, LineElement);
+Chart.register(LineController, LinearScale, PointElement, LineElement, Filler);
 
 type Props = {
   game: number;
@@ -149,24 +150,72 @@ export default function Graphs({ game, machineId, setting }: Props) {
   const data = {
     datasets: [
       {
-        label: 'Slump Graph',
+        label: '差枚数',
         data: results,
-        fill: false,
-        backgroundColor: 'rgb(3, 22, 129)',
-        borderColor: 'rgba(15, 8, 227, 0.2)',
+        fill: {
+          target: 'origin',
+          above: 'rgba(0, 255, 128, 0.15)',
+          below: 'rgba(255, 80, 80, 0.15)',
+        },
+        borderColor: '#00ff80',
+        borderWidth: 2,
+        pointRadius: 0,
+        tension: 0,
       },
     ],
   };
 
   const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
     scales: {
       x: {
         type: 'linear' as const,
         beginAtZero: true,
+        title: {
+          display: true,
+          text: '回転数',
+          color: '#aaa',
+          font: { size: 12 },
+        },
+        grid: {
+          color: 'rgba(255, 255, 255, 0.1)',
+        },
+        ticks: {
+          color: '#aaa',
+          maxTicksLimit: 10,
+        },
       },
       y: {
         type: 'linear' as const,
-        beginAtZero: true,
+        title: {
+          display: true,
+          text: '差枚数',
+          color: '#aaa',
+          font: { size: 12 },
+        },
+        grid: {
+          color: (context: { tick: { value: number } }) => {
+            if (context.tick.value === 0) {
+              return 'rgba(255, 255, 255, 0.5)';
+            }
+            return 'rgba(255, 255, 255, 0.1)';
+          },
+          lineWidth: (context: { tick: { value: number } }) => {
+            if (context.tick.value === 0) {
+              return 2;
+            }
+            return 1;
+          },
+        },
+        ticks: {
+          color: '#aaa',
+        },
       },
     },
   };

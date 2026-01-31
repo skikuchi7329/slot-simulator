@@ -38,7 +38,13 @@ const StyledGraphs = styled.div`
   }
 
   .graph {
-    width: 80%;
+    width: 90%;
+    max-width: 800px;
+    height: 400px;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   }
 
   .styled-table {
