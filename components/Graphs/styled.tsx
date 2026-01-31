@@ -8,33 +8,32 @@ const StyledGraphs = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 24px;
+    padding: 0 16px 40px;
   }
 
   .styled-button {
     display: inline-block;
-    font-size: 1em;
-    padding: 10px 20px;
-    margin: 10px;
-    color: #ffffff;
-    background: linear-gradient(to right, #726a95, #2c88d9);
+    font-size: 1.1em;
+    font-weight: bold;
+    padding: 14px 48px;
+    color: #121212;
+    background: linear-gradient(135deg, #00ff80 0%, #00cc66 100%);
     border: none;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: all 0.3s ease-out;
+    border-radius: 6px;
     cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 15px rgba(0, 255, 128, 0.3);
   }
 
   .styled-button:hover {
-    background: linear-gradient(to right, #2c88d9, #726a95);
-    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
-      0 17px 50px 0 rgba(0, 0, 0, 0.19);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 255, 128, 0.4);
   }
 
   .styled-button:active {
-    background: #2c88d9;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(0, 255, 128, 0.3);
   }
 
   .graph {
@@ -48,40 +47,76 @@ const StyledGraphs = styled.div`
   }
 
   .styled-table {
-    font-family: Arial, sans-serif;
     border-collapse: collapse;
-    width: 60%;
-    margin: auto;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
-    color: #333;
+    width: 90%;
+    max-width: 500px;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
   }
 
   .styled-table caption {
-    font-size: 1.5em;
-    margin-bottom: 10px;
+    padding: 14px 16px;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #00ff80;
+    background-color: #222;
     text-align: left;
+    border-bottom: 1px solid #333;
   }
 
   .styled-table th {
-    width: 20%;
-    background-color: #333;
-    color: white;
-    padding: 10px;
+    padding: 10px 16px;
+    background-color: #252525;
+    color: #aaa;
+    font-weight: normal;
     text-align: left;
+    width: 40%;
+    border-bottom: 1px solid #333;
   }
 
   .styled-table td {
-    border: 1px solid #999;
-    padding: 10px;
-    text-align: center;
+    padding: 10px 16px;
+    text-align: right;
+    color: #e0e0e0;
+    border-bottom: 1px solid #333;
   }
 
-  .styled-table tr:nth-child(even) {
-    background-color: #f2f2f2;
+  .styled-table thead th,
+  .styled-table thead td {
+    background-color: #222;
+    color: #888;
+    font-size: 0.85em;
+    padding: 8px 16px;
   }
 
-  .styled-table:last-of-type {
-    margin-bottom: 30px;
+  .styled-table tbody tr:last-child th,
+  .styled-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .styled-table tbody tr:hover {
+    background-color: rgba(0, 255, 128, 0.05);
+  }
+
+  .error-message {
+    color: #ff6b6b !important;
+    background-color: rgba(255, 107, 107, 0.1);
+    padding: 12px 20px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 107, 107, 0.3);
+  }
+
+  @media screen and (max-width: 600px) {
+    .graph {
+      width: 95%;
+      height: 300px;
+      padding: 12px;
+    }
+    .styled-table {
+      width: 95%;
+    }
   }
 `;
 
