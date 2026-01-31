@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Line } from 'react-chartjs-2';
 import {
   Chart,
@@ -14,19 +14,24 @@ import {
   RANDOM_MAX,
   COINS_PER_GAME,
   YEN_PER_COIN,
-  SYMBOL_CONFIGS,
-  getSymbolFromRandom,
+  SYMBOL_DISPLAY_NAMES,
   MIN_GAME_COUNT,
   MAX_GAME_COUNT,
+  MachineId,
+  SettingLevel,
+  generateRangeTable,
+  getSymbolFromRandom,
 } from '@/lib/constants/slotSettings';
 
 Chart.register(LineController, LinearScale, PointElement, LineElement);
 
 type Props = {
   game: number;
+  machineId: MachineId;
+  setting: SettingLevel;
 };
 
-export default function Graphs({ game }: Props) {
+export default function Graphs({ game, machineId, setting }: Props) {
   const [totalCoins, setTotalCoins] = useState(0);
   const [results, setResults] = useState<{ x: number; y: number }[]>([]);
   const [bbCount, setBBCount] = useState(0);
@@ -36,6 +41,11 @@ export default function Graphs({ game }: Props) {
   const [grapeCount, setGrapeCount] = useState(0);
   const [missCount, setMissCount] = useState(0);
   const [error, setError] = useState<string | null>(null);
+
+  const rangeTable = useMemo(
+    () => generateRangeTable(machineId, setting),
+    [machineId, setting]
+  );
 
   function gcd(a: number, b: number): number {
     if (!b) {
@@ -98,27 +108,24 @@ export default function Graphs({ game }: Props) {
     for (let i = 0; i < game; i++) {
       newCoins -= COINS_PER_GAME;
       const randomNum = Math.floor(Math.random() * RANDOM_MAX + 1);
-      const symbol = getSymbolFromRandom(randomNum);
+      const result = getSymbolFromRandom(randomNum, rangeTable);
 
-      switch (symbol) {
+      newCoins += result.payout;
+
+      switch (result.symbol) {
         case 'BB':
-          newCoins += SYMBOL_CONFIGS.BB.payout;
           bb++;
           break;
         case 'RB':
-          newCoins += SYMBOL_CONFIGS.RB.payout;
           rb++;
           break;
         case 'CHERRY':
-          newCoins += SYMBOL_CONFIGS.CHERRY.payout;
           cherry++;
           break;
         case 'REPLAY':
-          newCoins += SYMBOL_CONFIGS.REPLAY.payout;
           replay++;
           break;
         case 'GRAPE':
-          newCoins += SYMBOL_CONFIGS.GRAPE.payout;
           grape++;
           break;
         case 'MISS':
@@ -222,12 +229,12 @@ export default function Graphs({ game }: Props) {
           </thead>
           <tbody>
             <tr>
-              <th>{SYMBOL_CONFIGS.BB.displayName}</th>
+              <th>{SYMBOL_DISPLAY_NAMES.BB}</th>
               <td>{bbCount}</td>
               <td>{fraction(bbCount, totalCount)}</td>
             </tr>
             <tr>
-              <th>{SYMBOL_CONFIGS.RB.displayName}</th>
+              <th>{SYMBOL_DISPLAY_NAMES.RB}</th>
               <td>{rbCount}</td>
               <td>{fraction(rbCount, totalCount)}</td>
             </tr>
@@ -237,22 +244,22 @@ export default function Graphs({ game }: Props) {
               <td>{fraction(rbCount + bbCount, totalCount)}</td>
             </tr>
             <tr>
-              <th>{SYMBOL_CONFIGS.CHERRY.displayName}</th>
+              <th>{SYMBOL_DISPLAY_NAMES.CHERRY}</th>
               <td>{cherryCount}</td>
               <td>{fraction(cherryCount, totalCount)}</td>
             </tr>
             <tr>
-              <th>{SYMBOL_CONFIGS.REPLAY.displayName}</th>
+              <th>{SYMBOL_DISPLAY_NAMES.REPLAY}</th>
               <td>{replayCount}</td>
               <td>{fraction(replayCount, totalCount)}</td>
             </tr>
             <tr>
-              <th>{SYMBOL_CONFIGS.GRAPE.displayName}</th>
+              <th>{SYMBOL_DISPLAY_NAMES.GRAPE}</th>
               <td>{grapeCount}</td>
               <td>{fraction(grapeCount, totalCount)}</td>
             </tr>
             <tr>
-              <th>{SYMBOL_CONFIGS.MISS.displayName}</th>
+              <th>{SYMBOL_DISPLAY_NAMES.MISS}</th>
               <td>{missCount}</td>
               <td>{fraction(missCount, totalCount)}</td>
             </tr>

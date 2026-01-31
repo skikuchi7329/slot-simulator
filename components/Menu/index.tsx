@@ -1,15 +1,39 @@
 'use client';
 
 import StyledMenu from './styled';
+import {
+  MachineId,
+  SettingLevel,
+  MACHINE_LIST,
+} from '@/lib/constants/slotSettings';
 
 type Props = {
   game: number;
   setGame: (value: number) => void;
+  machineId: MachineId;
+  setMachineId: (value: MachineId) => void;
+  setting: SettingLevel;
+  setSetting: (value: SettingLevel) => void;
 };
 
-export default function Menu({ game, setGame }: Props) {
+export default function Menu({
+  game,
+  setGame,
+  machineId,
+  setMachineId,
+  setting,
+  setSetting,
+}: Props) {
   const handleGameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setGame(Number(e.target.value));
+  };
+
+  const handleMachineChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setMachineId(e.target.value as MachineId);
+  };
+
+  const handleSettingChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSetting(Number(e.target.value) as SettingLevel);
   };
 
   return (
@@ -20,43 +44,32 @@ export default function Menu({ game, setGame }: Props) {
           <tr>
             <th>機種</th>
             <td>
-              <select id="machine-type" defaultValue="s-Im">
-                <option value="s-Im">Sアイムジャグラー</option>
-                <option disabled value="my5">
-                  マイジャグラーV
-                </option>
-                <option disabled value="happy">
-                  ハッピージャグラー2
-                </option>
-                <option disabled value="funky">
-                  ファンキージャグラー2
-                </option>
-                <option disabled value="gogo">
-                  ゴーゴージャグラー3
-                </option>
+              <select
+                id="machine-type"
+                value={machineId}
+                onChange={handleMachineChange}
+              >
+                {MACHINE_LIST.map((machine) => (
+                  <option key={machine.id} value={machine.id}>
+                    {machine.name}
+                  </option>
+                ))}
               </select>
             </td>
           </tr>
           <tr>
             <th>設定</th>
             <td>
-              <select id="setting-level" defaultValue="6">
-                <option disabled value="1">
-                  1
-                </option>
-                <option disabled value="2">
-                  2
-                </option>
-                <option disabled value="3">
-                  3
-                </option>
-                <option disabled value="4">
-                  4
-                </option>
-                <option disabled value="5">
-                  5
-                </option>
-                <option value="6">6</option>
+              <select
+                id="setting-level"
+                value={setting}
+                onChange={handleSettingChange}
+              >
+                {([1, 2, 3, 4, 5, 6] as SettingLevel[]).map((level) => (
+                  <option key={level} value={level}>
+                    {level}
+                  </option>
+                ))}
               </select>
             </td>
           </tr>
