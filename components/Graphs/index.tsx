@@ -41,6 +41,7 @@ export default function Graphs({ game, machineId, setting }: Props) {
   const [replayCount, setReplayCount] = useState(0);
   const [grapeCount, setGrapeCount] = useState(0);
   const [missCount, setMissCount] = useState(0);
+  const [maxHamari, setMaxHamari] = useState(0);
   const [error, setError] = useState<string | null>(null);
 
   const rangeTable = useMemo(
@@ -104,6 +105,8 @@ export default function Graphs({ game, machineId, setting }: Props) {
       grape = 0,
       miss = 0;
     let newCoins = 0;
+    let currentHamari = 0;
+    let maxHamariCount = 0;
     const newResults: { x: number; y: number }[] = [{ x: 0, y: 0 }];
 
     for (let i = 0; i < game; i++) {
@@ -116,25 +119,42 @@ export default function Graphs({ game, machineId, setting }: Props) {
       switch (result.symbol) {
         case 'BB':
           bb++;
+          if (currentHamari > maxHamariCount) {
+            maxHamariCount = currentHamari;
+          }
+          currentHamari = 0;
           break;
         case 'RB':
           rb++;
+          if (currentHamari > maxHamariCount) {
+            maxHamariCount = currentHamari;
+          }
+          currentHamari = 0;
           break;
         case 'CHERRY':
           cherry++;
+          currentHamari++;
           break;
         case 'REPLAY':
           replay++;
+          currentHamari++;
           break;
         case 'GRAPE':
           grape++;
+          currentHamari++;
           break;
         case 'MISS':
         default:
           miss++;
+          currentHamari++;
           break;
       }
       newResults.push({ x: i + 1, y: newCoins });
+    }
+
+    // 最後のハマりもチェック
+    if (currentHamari > maxHamariCount) {
+      maxHamariCount = currentHamari;
     }
 
     setResults(newResults);
@@ -144,6 +164,7 @@ export default function Graphs({ game, machineId, setting }: Props) {
     setReplayCount(replay);
     setGrapeCount(grape);
     setMissCount(miss);
+    setMaxHamari(maxHamariCount);
     setTotalCoins(newCoins);
   };
 
@@ -263,6 +284,10 @@ export default function Graphs({ game, machineId, setting }: Props) {
             <tr>
               <th>機械割</th>
               <td>{calculatePayoutRate()}%</td>
+            </tr>
+            <tr>
+              <th>最大ハマり</th>
+              <td>{maxHamari}G</td>
             </tr>
           </tbody>
         </table>
