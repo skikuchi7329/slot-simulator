@@ -25,7 +25,15 @@ export default function Menu({
   setSetting,
 }: Props) {
   const handleGameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setGame(Number(e.target.value));
+    const value = e.target.value;
+    if (value === '') {
+      setGame(0);
+    } else {
+      const numValue = parseInt(value, 10);
+      if (!isNaN(numValue)) {
+        setGame(numValue);
+      }
+    }
   };
 
   const handleMachineChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
