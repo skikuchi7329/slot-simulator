@@ -511,27 +511,29 @@ export default function Graphs({ game, machineId, setting, trialCount }: Props) 
           </table>
         )}
 
-        <table className="styled-table">
-          <caption>{isMultiMode ? '最終試行の結果' : '結果'}</caption>
-          <tbody>
-            <tr>
-              <th>差枚数</th>
-              <td>{totalCoins}枚</td>
-            </tr>
-            <tr>
-              <th>収支</th>
-              <td>{totalCoins * YEN_PER_COIN}円</td>
-            </tr>
-            <tr>
-              <th>機械割</th>
-              <td>{calculatePayoutRate()}%</td>
-            </tr>
-            <tr>
-              <th>最大ハマり</th>
-              <td>{maxHamari}G</td>
-            </tr>
-          </tbody>
-        </table>
+        {!isMultiMode && (
+          <table className="styled-table">
+            <caption>結果</caption>
+            <tbody>
+              <tr>
+                <th>差枚数</th>
+                <td>{totalCoins}枚</td>
+              </tr>
+              <tr>
+                <th>収支</th>
+                <td>{totalCoins * YEN_PER_COIN}円</td>
+              </tr>
+              <tr>
+                <th>機械割</th>
+                <td>{calculatePayoutRate()}%</td>
+              </tr>
+              <tr>
+                <th>最大ハマり</th>
+                <td>{maxHamari}G</td>
+              </tr>
+            </tbody>
+          </table>
+        )}
 
         {!isMultiMode && (
           <table className="styled-table">
