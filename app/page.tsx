@@ -11,6 +11,7 @@ export default function Home() {
   const [game, setGame] = useState<number>(8000);
   const [machineId, setMachineId] = useState<MachineId>('aim');
   const [setting, setSetting] = useState<SettingLevel>(6);
+  const [trialCount, setTrialCount] = useState<number>(100);
 
   return (
     <>
@@ -22,8 +23,10 @@ export default function Home() {
         setMachineId={setMachineId}
         setting={setting}
         setSetting={setSetting}
+        trialCount={trialCount}
+        setTrialCount={setTrialCount}
       />
-      <Graphs game={game} machineId={machineId} setting={setting} />
+      <Graphs game={game} machineId={machineId} setting={setting} trialCount={trialCount} />
       <Footer />
     </>
   );

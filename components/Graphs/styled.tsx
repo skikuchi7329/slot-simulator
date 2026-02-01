@@ -12,11 +12,18 @@ const StyledGraphs = styled.div`
     padding: 0 16px 40px;
   }
 
+  .button-group {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
   .styled-button {
     display: inline-block;
     font-size: 1.1em;
     font-weight: bold;
-    padding: 14px 48px;
+    padding: 14px 32px;
     color: #121212;
     background: linear-gradient(135deg, #00ff80 0%, #00cc66 100%);
     border: none;
@@ -34,6 +41,19 @@ const StyledGraphs = styled.div`
   .styled-button:active {
     transform: translateY(0);
     box-shadow: 0 2px 10px rgba(0, 255, 128, 0.3);
+  }
+
+  .styled-button.multi {
+    background: linear-gradient(135deg, #80d4ff 0%, #4db8ff 100%);
+    box-shadow: 0 4px 15px rgba(77, 184, 255, 0.3);
+  }
+
+  .styled-button.multi:hover {
+    box-shadow: 0 6px 20px rgba(77, 184, 255, 0.4);
+  }
+
+  .styled-button.multi:active {
+    box-shadow: 0 2px 10px rgba(77, 184, 255, 0.3);
   }
 
   .graph {
@@ -98,6 +118,22 @@ const StyledGraphs = styled.div`
 
   .styled-table tbody tr:hover {
     background-color: rgba(0, 255, 128, 0.05);
+  }
+
+  .stats-table {
+    border: 2px solid #4db8ff;
+  }
+
+  .stats-table caption {
+    color: #80d4ff;
+  }
+
+  .positive {
+    color: #00ff80 !important;
+  }
+
+  .negative {
+    color: #ff6b6b !important;
   }
 
   .error-message {
