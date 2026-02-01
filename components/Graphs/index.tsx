@@ -58,6 +58,7 @@ interface MultiSimulationStats {
 export default function Graphs({ game, machineId, setting, trialCount }: Props) {
   const [totalCoins, setTotalCoins] = useState(0);
   const [results, setResults] = useState<{ x: number; y: number }[]>([]);
+  const [multiResults, setMultiResults] = useState<{ x: number; y: number }[][]>([]);
   const [bbCount, setBBCount] = useState(0);
   const [rbCount, setRBCount] = useState(0);
   const [cherryCount, setCherryCount] = useState(0);
@@ -194,6 +195,7 @@ export default function Graphs({ game, machineId, setting, trialCount }: Props) 
     setError(null);
     setIsMultiMode(false);
     setMultiStats(null);
+    setMultiResults([]);
 
     let bb = 0,
       rb = 0,
@@ -308,7 +310,10 @@ export default function Graphs({ game, machineId, setting, trialCount }: Props) 
 
     setMultiStats(stats);
 
-    // 最後のシミュレーション結果をグラフに表示
+    // すべてのシミュレーション結果をグラフ用に保存
+    setMultiResults(results.map((r) => r.graphData));
+
+    // 最後のシミュレーション結果を詳細表示用に設定
     const lastResult = results[results.length - 1];
     setResults(lastResult.graphData);
     setTotalCoins(lastResult.totalCoins);
@@ -317,30 +322,62 @@ export default function Graphs({ game, machineId, setting, trialCount }: Props) 
     setMaxHamari(lastResult.maxHamari);
   };
 
-  const data = {
-    datasets: [
-      {
-        label: '差枚数',
-        data: results,
-        fill: {
-          target: 'origin',
-          above: 'rgba(0, 255, 128, 0.15)',
-          below: 'rgba(255, 80, 80, 0.15)',
+  // 複数回シミュレーション用のデータセット生成
+  const generateMultiDatasets = () => {
+    if (!isMultiMode || multiResults.length === 0) {
+      return [
+        {
+          label: '差枚数',
+          data: results,
+          fill: {
+            target: 'origin',
+            above: 'rgba(0, 255, 128, 0.15)',
+            below: 'rgba(255, 80, 80, 0.15)',
+          },
+          borderColor: '#00ff80',
+          borderWidth: 2,
+          pointRadius: 0,
+          tension: 0,
         },
-        borderColor: '#00ff80',
-        borderWidth: 2,
+      ];
+    }
+
+    // 各ラインの最終結果に基づいて色を決定
+    return multiResults.map((graphData, index) => {
+      const finalValue = graphData[graphData.length - 1]?.y || 0;
+      const isPositive = finalValue >= 0;
+      // 透明度を調整（試行回数が多いほど薄く）
+      const opacity = Math.max(0.1, Math.min(0.6, 30 / trialCount));
+      const color = isPositive
+        ? `rgba(0, 255, 128, ${opacity})`
+        : `rgba(255, 80, 80, ${opacity})`;
+
+      return {
+        label: `試行${index + 1}`,
+        data: graphData,
+        fill: false,
+        borderColor: color,
+        borderWidth: 1,
         pointRadius: 0,
         tension: 0,
-      },
-    ],
+      };
+    });
+  };
+
+  const data = {
+    datasets: generateMultiDatasets(),
   };
 
   const options = {
     responsive: true,
     maintainAspectRatio: false,
+    animation: isMultiMode ? { duration: 0 } : { duration: 750 },
     plugins: {
       legend: {
         display: false,
+      },
+      tooltip: {
+        enabled: !isMultiMode || multiResults.length <= 10,
       },
     },
     scales: {
