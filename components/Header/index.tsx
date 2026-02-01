@@ -14,13 +14,13 @@ export default function Header() {
         <div className="menu">
           <ul>
             <li>
-              <Link href="/">HOME</Link>
+              <Link href="/">シミュレーター</Link>
+            </li>
+            <li>
+              <Link href="/estimate">設定推測</Link>
             </li>
             <li>
               <Link href="/about">開発者について</Link>
-            </li>
-            <li>
-              <Link href="/detail">詳細</Link>
             </li>
             <li>
               <Link href="/contact">お問合せ</Link>
