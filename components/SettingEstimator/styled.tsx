@@ -11,25 +11,27 @@ const StyledEstimator = styled.div`
 
   h1 {
     text-align: center;
-    color: #00ff80;
+    color: #d4af37;
     font-size: 1.8em;
     margin-bottom: 8px;
   }
 
   .description {
     text-align: center;
-    color: #888;
+    color: #666;
     margin-bottom: 24px;
   }
 
   .input-section {
-    background-color: #1a1a1a;
+    background-color: #fff;
     border-radius: 8px;
     padding: 24px;
     margin-bottom: 24px;
     display: flex;
     flex-direction: column;
     gap: 16px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
   }
 
   .input-group {
@@ -40,7 +42,7 @@ const StyledEstimator = styled.div`
 
   .input-group label {
     width: 100px;
-    color: #aaa;
+    color: #555;
     font-size: 0.95em;
   }
 
@@ -49,17 +51,17 @@ const StyledEstimator = styled.div`
     flex: 1;
     padding: 10px 12px;
     font-size: 1em;
-    border: 1px solid #333;
+    border: 1px solid #ccc;
     border-radius: 6px;
-    background-color: #252525;
-    color: #e0e0e0;
+    background-color: #fff;
+    color: #333;
     transition: border-color 0.2s;
   }
 
   .input-group input:focus,
   .input-group select:focus {
     outline: none;
-    border-color: #00ff80;
+    border-color: #d4af37;
   }
 
   .estimate-button {
@@ -68,19 +70,19 @@ const StyledEstimator = styled.div`
     font-size: 1.1em;
     font-weight: bold;
     padding: 14px;
-    color: #121212;
-    background: linear-gradient(135deg, #ffcc00 0%, #ff9900 100%);
+    color: #fff;
+    background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
     border: none;
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.2s ease;
-    box-shadow: 0 4px 15px rgba(255, 153, 0, 0.3);
+    box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
     margin-top: 8px;
   }
 
   .estimate-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 153, 0, 0.4);
+    box-shadow: 0 6px 20px rgba(255, 152, 0, 0.4);
   }
 
   .results-section {
@@ -90,32 +92,34 @@ const StyledEstimator = styled.div`
   .results-table {
     width: 100%;
     border-collapse: collapse;
-    background-color: #1a1a1a;
+    background-color: #fff;
     border-radius: 8px;
     overflow: hidden;
     margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
   }
 
   .results-table caption {
     padding: 14px 16px;
     font-size: 1.1em;
     font-weight: bold;
-    color: #ffcc00;
-    background-color: #222;
+    color: #ff9800;
+    background-color: #fafafa;
     text-align: left;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid #e0e0e0;
   }
 
   .results-table th,
   .results-table td {
     padding: 12px 16px;
     text-align: left;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid #e0e0e0;
   }
 
   .results-table thead th {
-    background-color: #252525;
-    color: #aaa;
+    background-color: #f5f5f5;
+    color: #666;
     font-weight: normal;
     font-size: 0.9em;
   }
@@ -125,24 +129,24 @@ const StyledEstimator = styled.div`
   }
 
   .results-table tbody tr:hover {
-    background-color: rgba(255, 204, 0, 0.05);
+    background-color: rgba(255, 152, 0, 0.05);
   }
 
   .results-table .rank-1 {
-    background-color: rgba(255, 204, 0, 0.15);
+    background-color: rgba(255, 152, 0, 0.15);
   }
 
   .results-table .rank-1 .setting-cell {
-    color: #ffcc00;
+    color: #e65100;
     font-weight: bold;
   }
 
   .results-table .rank-2 {
-    background-color: rgba(255, 204, 0, 0.08);
+    background-color: rgba(255, 152, 0, 0.08);
   }
 
   .setting-cell {
-    color: #e0e0e0;
+    color: #333;
     font-weight: 500;
   }
 
@@ -153,7 +157,7 @@ const StyledEstimator = styled.div`
   .probability-bar-container {
     position: relative;
     height: 24px;
-    background-color: #333;
+    background-color: #e0e0e0;
     border-radius: 4px;
     overflow: hidden;
   }
@@ -163,7 +167,7 @@ const StyledEstimator = styled.div`
     left: 0;
     top: 0;
     height: 100%;
-    background: linear-gradient(90deg, #ffcc00, #ff9900);
+    background: linear-gradient(90deg, #ff9800, #f57c00);
     border-radius: 4px;
     transition: width 0.3s ease;
   }
@@ -174,19 +178,21 @@ const StyledEstimator = styled.div`
     top: 50%;
     transform: translate(-50%, -50%);
     font-weight: bold;
-    color: #fff;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    color: #333;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
     font-size: 0.9em;
   }
 
   .actual-data {
-    background-color: #1a1a1a;
+    background-color: #fff;
     border-radius: 8px;
     padding: 16px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
   }
 
   .actual-data h3 {
-    color: #00ff80;
+    color: #2e7d32;
     font-size: 1em;
     margin-bottom: 12px;
   }
@@ -199,19 +205,19 @@ const StyledEstimator = styled.div`
   .data-table th,
   .data-table td {
     padding: 8px 12px;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid #e0e0e0;
   }
 
   .data-table th {
     text-align: left;
-    color: #888;
+    color: #666;
     font-weight: normal;
     width: 40%;
   }
 
   .data-table td {
     text-align: right;
-    color: #e0e0e0;
+    color: #333;
   }
 
   .data-table tr:last-child th,
@@ -220,13 +226,15 @@ const StyledEstimator = styled.div`
   }
 
   .reference-section {
-    background-color: #1a1a1a;
+    background-color: #fff;
     border-radius: 8px;
     padding: 16px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
   }
 
   .reference-section h3 {
-    color: #80d4ff;
+    color: #5a9fd4;
     font-size: 1em;
     margin-bottom: 12px;
   }
@@ -241,17 +249,17 @@ const StyledEstimator = styled.div`
   .reference-table td {
     padding: 8px 10px;
     text-align: center;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid #e0e0e0;
   }
 
   .reference-table thead th {
-    color: #888;
+    color: #666;
     font-weight: normal;
-    background-color: #222;
+    background-color: #f5f5f5;
   }
 
   .reference-table tbody td {
-    color: #ccc;
+    color: #444;
   }
 
   .reference-table tbody tr:last-child td {
@@ -259,7 +267,7 @@ const StyledEstimator = styled.div`
   }
 
   .reference-table tbody tr:hover {
-    background-color: rgba(128, 212, 255, 0.05);
+    background-color: rgba(90, 159, 212, 0.05);
   }
 
   @media screen and (max-width: 600px) {

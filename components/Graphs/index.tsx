@@ -331,10 +331,10 @@ export default function Graphs({ game, machineId, setting, trialCount }: Props) 
           data: results,
           fill: {
             target: 'origin',
-            above: 'rgba(0, 255, 128, 0.15)',
-            below: 'rgba(255, 80, 80, 0.15)',
+            above: 'rgba(46, 125, 50, 0.15)',
+            below: 'rgba(198, 40, 40, 0.15)',
           },
-          borderColor: '#00ff80',
+          borderColor: '#2e7d32',
           borderWidth: 2,
           pointRadius: 0,
           tension: 0,
@@ -347,10 +347,10 @@ export default function Graphs({ game, machineId, setting, trialCount }: Props) 
       const finalValue = graphData[graphData.length - 1]?.y || 0;
       const isPositive = finalValue >= 0;
       // 透明度を調整（試行回数が多いほど薄く）
-      const opacity = Math.max(0.1, Math.min(0.6, 30 / trialCount));
+      const opacity = Math.max(0.2, Math.min(0.7, 40 / trialCount));
       const color = isPositive
-        ? `rgba(0, 255, 128, ${opacity})`
-        : `rgba(255, 80, 80, ${opacity})`;
+        ? `rgba(46, 125, 50, ${opacity})`
+        : `rgba(198, 40, 40, ${opacity})`;
 
       return {
         label: `試行${index + 1}`,
@@ -387,14 +387,14 @@ export default function Graphs({ game, machineId, setting, trialCount }: Props) 
         title: {
           display: true,
           text: '回転数',
-          color: '#aaa',
+          color: '#666',
           font: { size: 12 },
         },
         grid: {
-          color: 'rgba(255, 255, 255, 0.1)',
+          color: 'rgba(0, 0, 0, 0.1)',
         },
         ticks: {
-          color: '#aaa',
+          color: '#666',
           maxTicksLimit: 10,
         },
       },
@@ -403,15 +403,15 @@ export default function Graphs({ game, machineId, setting, trialCount }: Props) 
         title: {
           display: true,
           text: '差枚数',
-          color: '#aaa',
+          color: '#666',
           font: { size: 12 },
         },
         grid: {
           color: (context: { tick: { value: number } }) => {
             if (context.tick.value === 0) {
-              return 'rgba(255, 255, 255, 0.5)';
+              return 'rgba(0, 0, 0, 0.4)';
             }
-            return 'rgba(255, 255, 255, 0.1)';
+            return 'rgba(0, 0, 0, 0.1)';
           },
           lineWidth: (context: { tick: { value: number } }) => {
             if (context.tick.value === 0) {
@@ -421,7 +421,7 @@ export default function Graphs({ game, machineId, setting, trialCount }: Props) 
           },
         },
         ticks: {
-          color: '#aaa',
+          color: '#666',
         },
       },
     },

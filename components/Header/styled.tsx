@@ -8,17 +8,16 @@ const StyledHeader = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 16px 24px;
-    background: linear-gradient(180deg, #1f1f1f 0%, #171717 100%);
-    border-bottom: 1px solid #2a2a2a;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(180deg, #fff 0%, #f8f8f8 100%);
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   }
 
   .title h1 {
     margin: 0;
     font-size: 1.5em;
     font-weight: bold;
-    color: #00ff80;
-    text-shadow: 0 0 10px rgba(0, 255, 128, 0.3);
+    color: #d4af37;
   }
 
   .title p {
@@ -38,15 +37,15 @@ const StyledHeader = styled.div`
     display: block;
     padding: 8px 16px;
     text-decoration: none;
-    color: #aaa;
+    color: #555;
     font-size: 0.9em;
     border-radius: 4px;
     transition: all 0.2s ease;
   }
 
   .menu ul li a:hover {
-    color: #00ff80;
-    background-color: rgba(0, 255, 128, 0.1);
+    color: #d4af37;
+    background-color: rgba(212, 175, 55, 0.1);
   }
 
   @media screen and (max-width: 768px) {
