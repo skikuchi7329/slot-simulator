@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useState, useMemo } from 'react';
-import { Line } from 'react-chartjs-2';
+import { useState, useMemo } from "react";
+import { Line } from "react-chartjs-2";
 import {
   Chart,
   LineController,
@@ -9,8 +9,8 @@ import {
   PointElement,
   LineElement,
   Filler,
-} from 'chart.js';
-import StyledGraphs from './styled';
+} from "chart.js";
+import StyledGraphs from "./styled";
 import {
   RANDOM_MAX,
   COINS_PER_GAME,
@@ -22,7 +22,7 @@ import {
   SettingLevel,
   generateRangeTable,
   getSymbolFromRandom,
-} from '@/lib/constants/slotSettings';
+} from "@/lib/constants/slotSettings";
 
 Chart.register(LineController, LinearScale, PointElement, LineElement, Filler);
 
@@ -55,10 +55,17 @@ interface MultiSimulationStats {
   maxHamari: number;
 }
 
-export default function Graphs({ game, machineId, setting, trialCount }: Props) {
+export default function Graphs({
+  game,
+  machineId,
+  setting,
+  trialCount,
+}: Props) {
   const [totalCoins, setTotalCoins] = useState(0);
   const [results, setResults] = useState<{ x: number; y: number }[]>([]);
-  const [multiResults, setMultiResults] = useState<{ x: number; y: number }[][]>([]);
+  const [multiResults, setMultiResults] = useState<
+    { x: number; y: number }[][]
+  >([]);
   const [bbCount, setBBCount] = useState(0);
   const [rbCount, setRBCount] = useState(0);
   const [cherryCount, setCherryCount] = useState(0);
@@ -67,12 +74,14 @@ export default function Graphs({ game, machineId, setting, trialCount }: Props) 
   const [missCount, setMissCount] = useState(0);
   const [maxHamari, setMaxHamari] = useState(0);
   const [error, setError] = useState<string | null>(null);
-  const [multiStats, setMultiStats] = useState<MultiSimulationStats | null>(null);
+  const [multiStats, setMultiStats] = useState<MultiSimulationStats | null>(
+    null,
+  );
   const [isMultiMode, setIsMultiMode] = useState(false);
 
   const rangeTable = useMemo(
     () => generateRangeTable(machineId, setting),
-    [machineId, setting]
+    [machineId, setting],
   );
 
   function gcd(a: number, b: number): number {
@@ -84,11 +93,11 @@ export default function Graphs({ game, machineId, setting, trialCount }: Props) 
 
   function fraction(numerator: number, denominator: number): string {
     if (denominator === 0 || numerator === 0) {
-      return '-';
+      return "-";
     }
 
     if (numerator < 0 || denominator < 0) {
-      return '-';
+      return "-";
     }
 
     const g = gcd(numerator, denominator);
@@ -104,7 +113,7 @@ export default function Graphs({ game, machineId, setting, trialCount }: Props) 
 
   const validateGameCount = (count: number): string | null => {
     if (isNaN(count)) {
-      return '回転数は数値で入力してください';
+      return "回転数は数値で入力してください";
     }
     if (count < MIN_GAME_COUNT) {
       return `回転数は${MIN_GAME_COUNT}以上で入力してください`;
@@ -136,33 +145,33 @@ export default function Graphs({ game, machineId, setting, trialCount }: Props) 
       newCoins += result.payout;
 
       switch (result.symbol) {
-        case 'BB':
+        case "BB":
           bb++;
           if (currentHamari > maxHamariCount) {
             maxHamariCount = currentHamari;
           }
           currentHamari = 0;
           break;
-        case 'RB':
+        case "RB":
           rb++;
           if (currentHamari > maxHamariCount) {
             maxHamariCount = currentHamari;
           }
           currentHamari = 0;
           break;
-        case 'CHERRY':
+        case "CHERRY":
           cherry++;
           currentHamari++;
           break;
-        case 'REPLAY':
+        case "REPLAY":
           replay++;
           currentHamari++;
           break;
-        case 'GRAPE':
+        case "GRAPE":
           grape++;
           currentHamari++;
           break;
-        case 'MISS':
+        case "MISS":
         default:
           miss++;
           currentHamari++;
@@ -216,33 +225,33 @@ export default function Graphs({ game, machineId, setting, trialCount }: Props) 
       newCoins += result.payout;
 
       switch (result.symbol) {
-        case 'BB':
+        case "BB":
           bb++;
           if (currentHamari > maxHamariCount) {
             maxHamariCount = currentHamari;
           }
           currentHamari = 0;
           break;
-        case 'RB':
+        case "RB":
           rb++;
           if (currentHamari > maxHamariCount) {
             maxHamariCount = currentHamari;
           }
           currentHamari = 0;
           break;
-        case 'CHERRY':
+        case "CHERRY":
           cherry++;
           currentHamari++;
           break;
-        case 'REPLAY':
+        case "REPLAY":
           replay++;
           currentHamari++;
           break;
-        case 'GRAPE':
+        case "GRAPE":
           grape++;
           currentHamari++;
           break;
-        case 'MISS':
+        case "MISS":
         default:
           miss++;
           currentHamari++;
@@ -289,7 +298,7 @@ export default function Graphs({ game, machineId, setting, trialCount }: Props) 
     const bonusCounts = results.map((r) => r.bbCount + r.rbCount);
     const hamaris = results.map((r) => r.maxHamari);
     const payoutRates = results.map(
-      (r) => ((r.totalCoins + totalBet) / totalBet) * 100
+      (r) => ((r.totalCoins + totalBet) / totalBet) * 100,
     );
 
     const stats: MultiSimulationStats = {
@@ -298,13 +307,16 @@ export default function Graphs({ game, machineId, setting, trialCount }: Props) 
       avgProfit: Math.round(profits.reduce((a, b) => a + b, 0) / trialCount),
       maxBonusCount: Math.max(...bonusCounts),
       minBonusCount: Math.min(...bonusCounts),
-      avgBonusCount: Math.round(
-        (bonusCounts.reduce((a, b) => a + b, 0) / trialCount) * 10
-      ) / 10,
-      winRate: Math.round((profits.filter((p) => p > 0).length / trialCount) * 1000) / 10,
-      avgPayoutRate: Math.round(
-        (payoutRates.reduce((a, b) => a + b, 0) / trialCount) * 100
-      ) / 100,
+      avgBonusCount:
+        Math.round((bonusCounts.reduce((a, b) => a + b, 0) / trialCount) * 10) /
+        10,
+      winRate:
+        Math.round((profits.filter((p) => p > 0).length / trialCount) * 1000) /
+        10,
+      avgPayoutRate:
+        Math.round(
+          (payoutRates.reduce((a, b) => a + b, 0) / trialCount) * 100,
+        ) / 100,
       maxHamari: Math.max(...hamaris),
     };
 
@@ -327,14 +339,14 @@ export default function Graphs({ game, machineId, setting, trialCount }: Props) 
     if (!isMultiMode || multiResults.length === 0) {
       return [
         {
-          label: '差枚数',
+          label: "差枚数",
           data: results,
           fill: {
-            target: 'origin',
-            above: 'rgba(0, 255, 128, 0.15)',
-            below: 'rgba(255, 80, 80, 0.15)',
+            target: "origin",
+            above: "rgba(0, 255, 128, 0.15)",
+            below: "rgba(255, 80, 80, 0.15)",
           },
-          borderColor: '#00ff80',
+          borderColor: "#00ff80",
           borderWidth: 2,
           pointRadius: 0,
           tension: 0,
@@ -382,36 +394,36 @@ export default function Graphs({ game, machineId, setting, trialCount }: Props) 
     },
     scales: {
       x: {
-        type: 'linear' as const,
+        type: "linear" as const,
         beginAtZero: true,
         title: {
           display: true,
-          text: '回転数',
-          color: '#aaa',
+          text: "回転数",
+          color: "#aaa",
           font: { size: 12 },
         },
         grid: {
-          color: 'rgba(255, 255, 255, 0.1)',
+          color: "rgba(255, 255, 255, 0.1)",
         },
         ticks: {
-          color: '#aaa',
+          color: "#aaa",
           maxTicksLimit: 10,
         },
       },
       y: {
-        type: 'linear' as const,
+        type: "linear" as const,
         title: {
           display: true,
-          text: '差枚数',
-          color: '#aaa',
+          text: "差枚数",
+          color: "#aaa",
           font: { size: 12 },
         },
         grid: {
           color: (context: { tick: { value: number } }) => {
             if (context.tick.value === 0) {
-              return 'rgba(255, 255, 255, 0.5)';
+              return "rgba(255, 255, 255, 0.5)";
             }
-            return 'rgba(255, 255, 255, 0.1)';
+            return "rgba(255, 255, 255, 0.1)";
           },
           lineWidth: (context: { tick: { value: number } }) => {
             if (context.tick.value === 0) {
@@ -421,7 +433,7 @@ export default function Graphs({ game, machineId, setting, trialCount }: Props) 
           },
         },
         ticks: {
-          color: '#aaa',
+          color: "#aaa",
         },
       },
     },
@@ -433,7 +445,7 @@ export default function Graphs({ game, machineId, setting, trialCount }: Props) 
   const calculatePayoutRate = (): string => {
     const totalBet = game * COINS_PER_GAME;
     if (totalBet === 0) {
-      return '0.00';
+      return "0.00";
     }
     return (((totalCoins + totalBet) / totalBet) * 100).toFixed(2);
   };
@@ -441,11 +453,7 @@ export default function Graphs({ game, machineId, setting, trialCount }: Props) 
   return (
     <StyledGraphs>
       <div className="container">
-        {error && (
-          <div className="error-message">
-            {error}
-          </div>
-        )}
+        {error && <div className="error-message">{error}</div>}
         <div className="button-group">
           <button className="styled-button" onClick={runSimulation}>
             単発シミュレーション
@@ -464,23 +472,41 @@ export default function Graphs({ game, machineId, setting, trialCount }: Props) 
             <tbody>
               <tr>
                 <th>最大収支</th>
-                <td className={multiStats.maxProfit >= 0 ? 'positive' : 'negative'}>
-                  {multiStats.maxProfit >= 0 ? '+' : ''}{multiStats.maxProfit}枚
-                  （{multiStats.maxProfit >= 0 ? '+' : ''}{multiStats.maxProfit * YEN_PER_COIN}円）
+                <td
+                  className={
+                    multiStats.maxProfit >= 0 ? "positive" : "negative"
+                  }
+                >
+                  {multiStats.maxProfit >= 0 ? "+" : ""}
+                  {multiStats.maxProfit}枚 （
+                  {multiStats.maxProfit >= 0 ? "+" : ""}
+                  {multiStats.maxProfit * YEN_PER_COIN}円）
                 </td>
               </tr>
               <tr>
                 <th>最低収支</th>
-                <td className={multiStats.minProfit >= 0 ? 'positive' : 'negative'}>
-                  {multiStats.minProfit >= 0 ? '+' : ''}{multiStats.minProfit}枚
-                  （{multiStats.minProfit >= 0 ? '+' : ''}{multiStats.minProfit * YEN_PER_COIN}円）
+                <td
+                  className={
+                    multiStats.minProfit >= 0 ? "positive" : "negative"
+                  }
+                >
+                  {multiStats.minProfit >= 0 ? "+" : ""}
+                  {multiStats.minProfit}枚 （
+                  {multiStats.minProfit >= 0 ? "+" : ""}
+                  {multiStats.minProfit * YEN_PER_COIN}円）
                 </td>
               </tr>
               <tr>
                 <th>平均収支</th>
-                <td className={multiStats.avgProfit >= 0 ? 'positive' : 'negative'}>
-                  {multiStats.avgProfit >= 0 ? '+' : ''}{multiStats.avgProfit}枚
-                  （{multiStats.avgProfit >= 0 ? '+' : ''}{multiStats.avgProfit * YEN_PER_COIN}円）
+                <td
+                  className={
+                    multiStats.avgProfit >= 0 ? "positive" : "negative"
+                  }
+                >
+                  {multiStats.avgProfit >= 0 ? "+" : ""}
+                  {multiStats.avgProfit}枚 （
+                  {multiStats.avgProfit >= 0 ? "+" : ""}
+                  {multiStats.avgProfit * YEN_PER_COIN}円）
                 </td>
               </tr>
               <tr>

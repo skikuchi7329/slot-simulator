@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const StyledMenu = styled.div`
   display: flex;
@@ -58,7 +58,9 @@ const StyledMenu = styled.div`
     border-radius: 4px;
     color: #fff;
     outline: none;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
   }
 
   .styled-table select:focus,
@@ -81,12 +83,12 @@ const StyledMenu = styled.div`
     color: #fff;
   }
 
-  .styled-table input[type='number'] {
+  .styled-table input[type="number"] {
     -moz-appearance: textfield;
   }
 
-  .styled-table input[type='number']::-webkit-outer-spin-button,
-  .styled-table input[type='number']::-webkit-inner-spin-button {
+  .styled-table input[type="number"]::-webkit-outer-spin-button,
+  .styled-table input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }

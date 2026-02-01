@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import StyledHeader from './styled';
+import Link from "next/link";
+import StyledHeader from "./styled";
 
 export default function Header() {
   return (

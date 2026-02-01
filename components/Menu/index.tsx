@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import StyledMenu from './styled';
+import StyledMenu from "./styled";
 import {
   MachineId,
   SettingLevel,
   MACHINE_LIST,
-} from '@/lib/constants/slotSettings';
+} from "@/lib/constants/slotSettings";
 
 type Props = {
   game: number;
@@ -30,7 +30,7 @@ export default function Menu({
 }: Props) {
   const handleGameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    if (value === '') {
+    if (value === "") {
       setGame(0);
     } else {
       const numValue = parseInt(value, 10);
@@ -50,7 +50,7 @@ export default function Menu({
 
   const handleTrialCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    if (value === '') {
+    if (value === "") {
       setTrialCount(1);
     } else {
       const numValue = parseInt(value, 10);

@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import StyledFooter from './styled';
+import Link from "next/link";
+import StyledFooter from "./styled";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
