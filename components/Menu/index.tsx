@@ -14,6 +14,8 @@ type Props = {
   setMachineId: (value: MachineId) => void;
   setting: SettingLevel;
   setSetting: (value: SettingLevel) => void;
+  trialCount: number;
+  setTrialCount: (value: number) => void;
 };
 
 export default function Menu({
@@ -23,6 +25,8 @@ export default function Menu({
   setMachineId,
   setting,
   setSetting,
+  trialCount,
+  setTrialCount,
 }: Props) {
   const handleGameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -42,6 +46,18 @@ export default function Menu({
 
   const handleSettingChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSetting(Number(e.target.value) as SettingLevel);
+  };
+
+  const handleTrialCountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (value === '') {
+      setTrialCount(1);
+    } else {
+      const numValue = parseInt(value, 10);
+      if (!isNaN(numValue) && numValue >= 1 && numValue <= 1000) {
+        setTrialCount(numValue);
+      }
+    }
   };
 
   return (
@@ -91,6 +107,19 @@ export default function Menu({
                 onChange={handleGameChange}
                 min={1}
                 max={100000}
+              />
+            </td>
+          </tr>
+          <tr>
+            <th>試行回数</th>
+            <td>
+              <input
+                type="number"
+                id="trial-count"
+                value={trialCount}
+                onChange={handleTrialCountChange}
+                min={1}
+                max={1000}
               />
             </td>
           </tr>
