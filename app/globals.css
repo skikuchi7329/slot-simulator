@@ -11,23 +11,23 @@ body {
   font-family: "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #121212;
-  color: #e0e0e0;
+  background-color: #f5f5f5;
+  color: #333;
 }
 
 a {
-  color: #00ff80;
+  color: #0066cc;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 a:hover {
-  color: #00cc66;
+  color: #004499;
 }
 
 ::selection {
-  background-color: #00ff80;
-  color: #121212;
+  background-color: #0066cc;
+  color: #fff;
 }
 
 ::-webkit-scrollbar {
@@ -35,14 +35,14 @@ a:hover {
 }
 
 ::-webkit-scrollbar-track {
-  background: #1a1a1a;
+  background: #e0e0e0;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333;
+  background: #999;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #444;
+  background: #777;
 }

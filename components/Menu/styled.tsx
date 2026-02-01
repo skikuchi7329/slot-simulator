@@ -12,35 +12,36 @@ const StyledMenu = styled.div`
     border-collapse: collapse;
     font-size: 0.95em;
     min-width: 320px;
-    background-color: #1a1a1a;
+    background-color: #fff;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
   }
 
   .styled-table caption {
     padding: 16px;
     font-size: 1.1em;
     font-weight: bold;
-    color: #00ff80;
-    background-color: #222;
+    color: #d4af37;
+    background-color: #fafafa;
     text-align: left;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid #e0e0e0;
   }
 
   .styled-table th {
     padding: 12px 16px;
-    background-color: #252525;
-    color: #aaa;
+    background-color: #f5f5f5;
+    color: #666;
     font-weight: normal;
     text-align: left;
     width: 120px;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid #e0e0e0;
   }
 
   .styled-table td {
     padding: 12px 16px;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid #e0e0e0;
   }
 
   .styled-table tbody tr:last-child th,
@@ -53,10 +54,10 @@ const StyledMenu = styled.div`
     width: 100%;
     padding: 10px 12px;
     font-size: 1em;
-    background-color: #2a2a2a;
-    border: 1px solid #444;
+    background-color: #fff;
+    border: 1px solid #ccc;
     border-radius: 4px;
-    color: #fff;
+    color: #333;
     outline: none;
     transition:
       border-color 0.2s ease,
@@ -65,22 +66,22 @@ const StyledMenu = styled.div`
 
   .styled-table select:focus,
   .styled-table input:focus {
-    border-color: #00ff80;
-    box-shadow: 0 0 0 2px rgba(0, 255, 128, 0.2);
+    border-color: #d4af37;
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
   }
 
   .styled-table select {
     cursor: pointer;
     appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 12px center;
     padding-right: 36px;
   }
 
   .styled-table select option {
-    background-color: #2a2a2a;
-    color: #fff;
+    background-color: #fff;
+    color: #333;
   }
 
   .styled-table input[type="number"] {
